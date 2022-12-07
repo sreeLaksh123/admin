@@ -1,0 +1,37 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<templates id="template" xml:space="preserve">
+    <t t-name="ProductsPopup" owl="1">
+        <div role="dialog" class="modal-dialog">
+            <div class="popup popup-textinput">
+                <p class="title">
+                    <t t-esc="props.title"/>
+                </p>
+                <div class="container">
+                    <table style="width:100%; border: 2px;">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Order Qty</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                              <t t-foreach="props.order" t-as="i" t-key="i">
+                                  <tr>
+                                     <td><t t-esc="i.product_id[1]"/></td>
+                                      <td><input class="myInput" type="Text" t-att-data-product="i.product_id[0]" required="True"/></td>
+                                  </tr>
+                              </t>
+                        </tbody>
+                    </table>
+                    <div class="footer">
+                    <div class="button cancel" t-on-click="confirm">
+                        <t t-esc="props.confirmText"/>
+                    </div>
+                        <div class="button add" t-on-click="onClickAdd">Apply
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

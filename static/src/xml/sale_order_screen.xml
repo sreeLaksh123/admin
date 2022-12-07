@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+   <t t-name="SaleOrderScreen" owl="1">
+       <div class="scale-screen screen">
+        <div class="screen-content">
+                <div class="top-content">
+                   <t t-out="Center"/>
+                    <div class="top-content">
+                       <div class="button back" t-on-click="back">
+                           <i class="fa fa-angle-double-left"/>
+                           Back
+                       </div>
+                   </div>
+                </div>
+           <div class="orders">
+                    <div class="header-row" t-att-class="{ oe_hidden: env.isMobile }">
+                        <div class="col name">Order</div>
+                        <div class="col date">Date</div>
+                        <div class="col customer">Customer</div>
+                        <div class="col salesman">Salesperson</div>
+                        <div class="col end total">Total</div>
+                        <div class="col state">State</div>
+                        <div class="col import">Import Order</div>
+                    </div>
+               <div class="order-list">
+                <t t-foreach="this.sale_order" t-as="order" t-key="order.id">
+                    <div class="order-row"
+                         t-att-class="{ highlight: highlighted }"
+                         t-on-click="() => this.trigger('click-sale-order', props.order)">
+                    <div class="col name">
+                        <div t-if="env.isMobile">Order</div>
+                        <div><t t-esc="order.name"/></div>
+                    </div>
+                        <div class="col date">
+                        <div t-if="env.isMobile">Date</div>
+                            <div><t t-esc="order.date_order"/></div>
+                    </div>
+                        <div class="col partner">
+                        <div t-if="env.isMobile">Customer</div>
+                            <div><t t-esc="order.partner_id[1]"/></div>
+                    </div>
+                        <div class="col salesman">
+                        <div t-if="env.isMobile">Salesman</div>
+                            <div><t t-esc="order.user_id[1]"/></div>
+                    </div>
+                        <div class="col end total">
+                        <div t-if="env.isMobile">Total</div>
+                            <div class="flex-container">
+                            <div class="self-end">
+                                <t t-esc="order.amount_total"/>
+                            </div>
+                                <div t-if="showAmountUnpaid" class="self-end text-gray">
+                                (left: <t t-esc="amountUnpaidRepr"/>)
+                            </div>
+                        </div>
+                    </div>
+                        <div class="col state">
+                        <div t-if="env.isMobile">State</div>
+                            <div><t t-esc="state"/></div>
+                    </div>
+                        <div class="col import">
+                        <button name="import_sale" t-on-click="() => this.onClickImportSale(order)" value="order">
+                            Import Sale Order
+                        </button>
+                    </div>
+                    </div>
+                </t>
+            </div>
+            </div>
+        </div>
+       </div>
+   </t>
+</templates>
